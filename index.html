@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="container">
+    <!-- <div style="text-align : center;"> -->
+    <!-- <div class="phone-size"> -->
+    <article class="start">
+            <!-- <div class="jb-image"><img src="img1.png" alt=""></div> -->
+        <button type="button" class="btn-start" onclick='start();'></button>
+        
+    </article>
+    <!-- </div> -->
+    <!-- <div class="phone-size"> -->
+    <article class="question">
+        <input id="type" type="hidden" value="SP">
+        <div class="button-box">
+            <button id="A" type="button" class="block"></button>
+            <button id="B" type="button" class="block"></button>
+            <button id="C" type="button" class="block"></button>
+            <button id="D" type="button" class="block"></button>
+            <button id="E" type="button" class="block"></button>
+        </div>  
+    </article>
+    <!-- </div> -->
+    <article class="result">
+        <!-- <img class="updown-slash mt-5" src="img/dark-slash.png" alt="dark-slash">
+        <span class="result-message mt-4 mb-4">나와 비슷한 세렝게티 동물은?</span>
+        <img class="updown-slash" src="img/up-slash.png" alt="up-slash">
+        <img id="img" class="rounded-circle mt-5" src="img/lion.png" alt="animal">
+        <h2 id="animal" class="result-animal text-center mt-4 mb-4">동물이름</h2>
+        <img class="updown-slash" src="img/down-slash.png" alt="down-slash">
+        <h3 id="explain" class="result-explain text-center mt-4">설명</h3>
+        <div class="rectangle mt-4 mb-4"></div> -->
+
+        <button id="share" onclick="js:kakaoshare()"></button>
+        <button id ="instagram" onclick="location.href='https://www.instagram.com/thinkinginsidethebox1/'" ></button>
+        <button id ="again" onClick="window.location.reload();">한번 더 하기</button>
+
+
+        <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+        <!-- <div class="share addthis_inline_share_toolbox"></div> -->
+    </article>
+        <!-- <article class="logo">
+            <img class="mt-5 likelion-logo" src="img/likelion-logo.png" alt="likelion-logo">
+            <span class="mt-2 text-center copyright-text">Copyright 2020 LIKE LION all rights reserved</span>
+        </article>
+        <article class="kakao_ad mt-5">
+            <ins class="kakao_ad_area" style="display:none;" 
+            data-ad-unit    = "DAN-fiECh1Z0P67tZh2d" 
+            data-ad-width   = "320" 
+            data-ad-height  = "100"></ins>
+        </article>
+        <a class="mt-5 banner" href="https://www.codelion.net/catalog?utm_source=animal_test&utm_medium=web_lecture&utm_campaign=jocoding">
+            <img class="banner-img" src="img/banner.png" alt="banner">
+        </a> -->
+    <script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+    <input type="hidden" id="SP" value="0">
+    <input type="hidden" id="SW" value="0">
+    <input type="hidden" id="CI" value="0">
+    <input type="hidden" id="AL" value="0">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+        var num = 1;
+        var q = {
+            1: {"title": "1번", "pic": "/image/img1.png", "type": "CI", "A": "1", "B": "2", "C":"3", "D":"4", "E":"5"},
+            2: {"title": "2번", "pic": "/image/img2.png", "type": "AL", "A": "1", "B": "2", "C":"3", "D":"4", "E":"5"},
+            3: {"title": "3번", "pic": "/image/img3.png", "type": "SP", "A": "1", "B": "2", "C":"3", "D":"4", "E":"5"},
+            4: {"title": "4번", "pic": "/image/img4.png", "type": "CI", "A": "1", "B": "2", "C":"3", "D":"4", "E":"5"},
+            5: {"title": "5번", "pic": "/image/img5.png", "type": "SW", "A": "1", "B": "2", "C":"3", "D":"4", "E":"5"},
+            6: {"title": "6번", "pic": "/image/img6.png", "type": "SW", "A": "1", "B": "2", "C":"3", "D":"4", "E":"5"},
+        }
+        var q_size = {
+            1: {"height": "224px", "width": "auto", "top": "61%", "left": "50%"},
+            2: {"height": "220px", "width": "150px", "top": "33%", "left": "25%"},
+            3: {"height": "250px", "width": "280px", "top": "48%", "left": "50%"},
+            4: {"height": "200px", "width": "280px", "top": "34%", "left": "41%"},
+            5: {"height": "200px", "width": "280px", "top": "33%", "left": "65%"},
+            6: {"height": "230px", "width": "280px", "top": "40%", "left": "65%"},
+        }
+        var result = {
+            1: {"SP": "2", "SW": "2", "CI": "4", "AL": "3", "pic": "/image/result1.png"},
+            2: {"SP": "1", "SW": "2", "CI": "2", "AL": "2", "pic": "/image/result2.png"},
+            3: {"SP": "2", "SW": "2", "CI": "3", "AL": "2", "pic": "/image/result3.png"},
+            4: {"SP": "4", "SW": "3", "CI": "5", "AL": "1", "pic": "/image/result4.png"},
+            5: {"SP": "2", "SW": "3", "CI": "1", "AL": "2", "pic": "/image/result5.png"},
+            6: {"SP": "2", "SW": "4", "CI": "4", "AL": "4", "pic": "/image/result6.png"},
+            7: {"SP": "3", "SW": "4", "CI": "1", "AL": "5", "pic": "/image/result7.png"},
+            8: {"SP": "5", "SW": "2", "CI": "1", "AL": "1", "pic": "/image/result8.png"},
+            9: {"SP": "5", "SW": "1", "CI": "3", "AL": "1", "pic": "/image/result9.png"},
+            10: {"SP": "3", "SW": "5", "CI": "1", "AL": "5", "pic": "/image/result10.png"},
+            11: {"SP": "2", "SW": "4", "CI": "4", "AL": "4", "pic": "/image/result11.png"},
+        }
+        function start() {
+            $(".start").hide();
+            
+            // $(".button-box").show();
+
+            next();
+        }
+        function kakaoshare(){
+          Kakao.Link.sendDefault({
+              objectType: 'feed',
+              content: {
+              title: '디저트 사진',
+              description: '아메리카노, 빵, 케익',
+              imageUrl:
+                  'http://mud-kage.kakao.co.kr/dn/NTmhS/btqfEUdFAUf/FjKzkZsnoeE4o19klTOVI1/openlink_640x640s.jpg',
+              link: {
+                  mobileWebUrl: 'https://developers.kakao.com',
+                  androidExecutionParams: 'test',
+              },
+              },
+              social: {
+              likeCount: 10,
+              commentCount: 20,
+              sharedCount: 30,
+              },
+              buttons: [
+              {
+                  title: '웹으로 이동',
+                  link: {
+                  mobileWebUrl: 'https://developers.kakao.com',
+                  },
+              },
+              {
+                  title: '앱으로 이동',
+                  link: {
+                  mobileWebUrl: 'https://developers.kakao.com',
+                  },
+              },
+              ]
+          });
+      }
+        $("#A").click(function(){
+            var type = $("#type").val();
+            var preValue = $("#"+type).val();
+            $("#"+type).val(parseInt(preValue)+1);
+            next();
+        });
+        $("#B").click(function(){
+            var type = $("#type").val();
+            var preValue = $("#"+type).val();
+            $("#"+type).val(parseInt(preValue)+2);
+            next();
+        });
+        $("#C").click(function(){
+            var type = $("#type").val();
+            var preValue = $("#"+type).val();
+            $("#"+type).val(parseInt(preValue)+3);
+            next();
+        });
+        $("#D").click(function(){
+            var type = $("#type").val();
+            var preValue = $("#"+type).val();
+            $("#"+type).val(parseInt(preValue)+4);
+            next();
+        });
+        $("#E").click(function(){
+            var type = $("#type").val();
+            var preValue = $("#"+type).val();
+            $("#"+type).val(parseInt(preValue)+5);
+            next();
+        });
+        function next() {
+            if (num == 7) {
+                $(".question").hide();
+                
+                var my_sp = $("#SP").val();
+                var my_sw = $("#SW").val()/2;
+                var my_ci = $("#CI").val()/2;
+                var my_al = $("#AL").val();
+
+                console.log(my_sp, my_sw, my_ci, my_al);
+
+
+                var cocktail_len = 11;
+                var collect_arr = [];
+                for(i=1; i<cocktail_len+1; i++){
+                    var co_sp = result[i]["SP"];
+                    var co_sw = result[i]["SW"];
+                    var co_ci = result[i]["CI"];
+                    var co_al = result[i]["AL"];
+                    var total_num = Math.pow((my_sp-co_sp),2) + Math.pow((my_sw-co_sw),2) + Math.pow((my_ci-co_ci),2) + Math.pow((my_al-co_al),2);
+                    collect_arr.push(total_num);
+                }
+                var my_max = Math.max.apply(null,collect_arr);
+                var my_min = Math.min.apply(null,collect_arr);
+                var max_index = collect_arr.indexOf(my_max);
+                var min_index = collect_arr.indexOf(my_min);
+
+                console.log(collect_arr);
+                console.log(my_min);
+                console.log(min_index);
+
+
+                $(".result").attr('style','background: url("'+result[min_index+1]["pic"]+'") no-repeat center/cover');
+                $(".result").show();
+            } else {
+                // $(".progress-bar").attr('style','width: calc(100/12*'+num+'%)');
+                $(".question").attr('style','background: url("'+q[num]["pic"]+'") no-repeat center/cover');
+                $(".question").show();
+                $(".button-box").attr('style','height: '+q_size[num]["height"]+'; width: '+q_size[num]["width"] + '; top: '+q_size[num]["top"]+ '; left: '+q_size[num]["left"]+';');
+                // $(".button-box").attr('style','width: '+q_size[num]["width"]);
+                // $(".button-box").attr('style','top: '+q_size[num]["top"]);
+                // $(".button-box").attr('style','left: '+q_size[num]["left"]);
+                // $(".result").attr('style','background: url("'+result[max_index]["pic"]+'") no-repeat center/cover');
+
+
+                $("#title").html(q[num]["title"]);
+                $("#type").val(q[num]["type"]);
+                // $("#A").html(q[num]["A"]);
+                // $("#B").html(q[num]["B"]);
+                // $("#C").html(q[num]["C"]);
+                // $("#D").html(q[num]["D"]);
+                // $("#E").html(q[num]["E"]);
+                num++;
+            }
+        }
+    
+    </script>
+    <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5fd715cbced615c4"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+      Kakao.init('5309ccf3a59cd714d8540c4beb206315');
+      Kakao.isInitialized();
+    </script>
+    <!--
+        Copyright (c) 2020 by Likelion (https://www.codelion.net/)
+        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+        The codelion advertising banner image (img/banner.png) shall be included in all copies or substantial portions of the Software at the main HTML page.
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+</body>
+<!-- 
+
+<body >
+    <div style="text-align : center;">
+        <div class="back_image" style="background-image: url(img1.png);"></div>
+        <img src="img1.png">
+        <button name="test" type="button" onclick="alert('투명함');" style="width:100px;height:100px;cursor:hand;filter:alpha(opacity=1);top:10px;left:30px;z-index:100"></button>
+        <button name="test2" type="button" onclick="alert('투명하지않음');" style="width:100px;height:100px;cursor:hand;position:absolute;top:180px;left:30px;z-index:100">
+   
+        <div class="jb-wrap">
+            <div class="jb-image"><img src="img1.png" alt=""></div>
+            <div class="jb-button-box">
+                <button type="button" class="block"></button>
+                <button type="button" class="block"></button>
+                <button type="button" class="block"></button>
+                <button type="button" class="block"></button>
+                <button type="button" class="block"></button>
+            </div>
+        </div>
+    
+    </div>
+</body> -->
+</html>
